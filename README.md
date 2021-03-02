@@ -7,7 +7,7 @@
 
 ## :scroll: Description
 <!--- Describe your app in one or two sentences -->
-Awesome
+This app show case the used of JetPackCompose without XLD or Fragment, Adopt your friendly Hachi now 🐶
 
 
 ## :bulb: Motivation and Context
