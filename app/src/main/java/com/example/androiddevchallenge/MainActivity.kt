@@ -21,11 +21,25 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.*
+import androidx.compose.material.Button
+import androidx.compose.material.Card
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Surface
+import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -42,7 +56,11 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import androidx.navigation.NavType
-import androidx.navigation.compose.*
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.navArgument
+import androidx.navigation.compose.navigate
+import androidx.navigation.compose.rememberNavController
 import com.example.androiddevchallenge.data.puppies
 import com.example.androiddevchallenge.model.Puppy
 import com.example.androiddevchallenge.ui.theme.MyTheme
@@ -64,7 +82,6 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
-
 }
 
 @Composable
@@ -84,15 +101,18 @@ fun AppNavigator(onToggleTheme: () -> Boolean) {
             }
             composable(
                 "puppuDetailsView/{puppyId}",
-                arguments = listOf(navArgument("puppyId") {
-                    type = NavType.IntType
-                })
+                arguments = listOf(
+                    navArgument("puppyId") {
+                        type = NavType.IntType
+                    }
+                )
             ) { backStackEntry ->
                 backStackEntry.arguments?.getInt("puppyId")?.let {
                     PuppyDetailsView(puppy = puppies()[it])
                 }
             }
-        })
+        }
+    )
 }
 
 // Start building your app here!
@@ -103,7 +123,6 @@ fun MyApp(content: @Composable () -> Unit) {
     }
 }
 
-
 @Composable
 fun PuppyListView(
     navController: NavHostController,
@@ -113,13 +132,12 @@ fun PuppyListView(
     val onDarkMode = remember { mutableStateOf(false) }
 
     fun navigateToDetailsView(puppyId: Int) {
-        navController.navigate("puppuDetailsView/${puppyId}")
+        navController.navigate("puppuDetailsView/$puppyId")
     }
 
     Column(
         modifier = Modifier.padding(16.dp)
     ) {
-
 
         Row {
             Text(
@@ -155,9 +173,12 @@ fun PuppyListView(
             verticalArrangement = Arrangement.spacedBy(8.dp)
         ) {
             itemsIndexed(items = puppies) { index, puppy ->
-                PuppyItem(puppy, {
-                    navigateToDetailsView(index)
-                })
+                PuppyItem(
+                    puppy,
+                    {
+                        navigateToDetailsView(index)
+                    }
+                )
             }
         }
     }
@@ -170,9 +191,11 @@ fun PuppyItem(puppy: Puppy, onClick: () -> Unit) {
         shape = RoundedCornerShape(16.dp),
         backgroundColor = MaterialTheme.colors.surface,
         modifier = Modifier
-            .clickable(onClick = {
-                onClick()
-            })
+            .clickable(
+                onClick = {
+                    onClick()
+                }
+            )
             .fillMaxWidth()
     ) {
         Box(
@@ -229,7 +252,6 @@ fun PuppyItem(puppy: Puppy, onClick: () -> Unit) {
                 }
             }
         }
-
     }
 }
 
@@ -312,10 +334,8 @@ fun PuppyDetailsView(puppy: Puppy) {
                                 color = Color.White
                             )
                         }
-
                     }
                 }
-
             }
         }
     }
@@ -362,7 +382,6 @@ fun Distance() {
     }
 }
 
-
 @Preview("Light Theme", widthDp = 360, heightDp = 640)
 @Composable
 fun LightPreview() {
@@ -387,8 +406,6 @@ fun DarkPreview() {
             }
         }
     }
-
-
 }
 
 @Preview("Puppy Preview", widthDp = 360, heightDp = 640)
