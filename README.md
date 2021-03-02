@@ -14,7 +14,7 @@ This app showcase the used of JetPackCompose without XML or Fragment, Adopt your
 <!--- Optionally point readers to interesting parts of your submission. -->
 The motivation of this app is from the 2009 american drama film `Hachico: A Dog's Tale`, Which shows the dogs love to his owner
 <!--- What are you especially proud of? -->
-I'm proud that I finish this app in just about 5 hours of coding because of amazing jetpack compose amazing documentation and codelabs
+I'm proud that I finish this app in just about 5 hours of coding because of jetpack compose amazing documentation and codelabs
 
 ## :camera_flash: Screenshots
 <!-- You can add more screenshots here if you like -->
